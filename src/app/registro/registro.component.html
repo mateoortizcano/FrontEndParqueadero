@@ -40,22 +40,22 @@
 <div class="row">
   <div  class="columnas col-md-3" >
     <h3>Registro</h3>
-    <form #vehiculo = "ngForm" (ngSubmit) = "onClickSubmit(vehiculo.value)">
+    <form #vehiculo = "ngForm" (ngSubmit) = "onClickSubmit(vehiculo.value)" ngNativeValidate>
       <div class="form-check form-check-inline">
-        <input class="form-check-input" id="checkcarro" type="radio" name="tipo" value="2" (focus)="isOn=false" ngModel checked>
+        <input class="form-check-input" id="checkcarro" type="radio" name="tipo" value="2" (focus)="isOn=false" ngModel required>
         <label for="checkcarro" class="form-check-label">Carro</label>
       </div>
       <div class="form-check form-check-inline">
-        <input class="form-check-input" id="checkmoto" type="radio" name="tipo" value="1" (focus)="isOn=true" ngModel>
+        <input class="form-check-input" id="checkmoto" type="radio" name="tipo" value="1" (focus)="isOn=true" ngModel required>
         <label for="checkmoto" class="form-check-label" >Moto</label>
       </div>
       <div class="form-group">
         <label for="placa">Placa</label>
-        <input type="text" class="form-control" name="placa"  placeholder="Ingrese placa" required="required" ngModel>
+        <input type="text" class="form-control" name="placa"  placeholder="Ingrese placa" required ngModel/>
       </div>
       <div class="form-group" *ngIf="isOn">
         <label for="cilindraje">Cilindraje</label>
-        <input type="text" class="form-control" name="cilindraje" placeholder="Ingrese cilindraje" ngModel>
+        <input type="text" class="form-control" name="cilindraje" placeholder="Ingrese cilindraje" required ngModel/>
       </div>
       <button type="submit" class="btn btn-primary" >Ingresar</button>
     </form>
