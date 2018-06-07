@@ -40,35 +40,45 @@
 <div class="row">
   <div  class="columnas col-md-4">
     <h3>Registro</h3>
-    <hr>
     <form #vehiculo = "ngForm" (ngSubmit) = "onClickSubmit(vehiculo.value)" ngNativeValidate>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" id="checkcarro" type="radio" name="tipo" value="2" (focus)="isOn=false" ngModel required>
-        <label for="checkcarro" class="form-check-label">Carro</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" id="checkmoto" type="radio" name="tipo" value="1" (focus)="isOn=true" ngModel required>
-        <label for="checkmoto" class="form-check-label" >Moto</label>
-      </div>
       <div class="form-group">
-        <input type="text" class="form-control" name="placa"  placeholder="Ingrese placa" required ngModel/>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" id="checkcarro" type="radio" name="tipo" value="2" (focus)="isOn=false" ngModel required>
+          <label for="checkcarro" class="form-check-label">Carro</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" id="checkmoto" type="radio" name="tipo" value="1" (focus)="isOn=true" ngModel required>
+          <label for="checkmoto" class="form-check-label" >Moto</label>
+        </div>
       </div>
-      <div class="form-group" *ngIf="isOn">
-        <label for="cilindraje">Cilindraje</label>
-        <input type="text" class="form-control" name="cilindraje" placeholder="Ingrese cilindraje" required ngModel/>
+      <div class="form-group row">
+          <div  class="col-sm-4" >
+            <label for="placa">Placa</label>
+          </div>
+        <div  class="col-sm-8">
+          <input type="text" class="form-control" name="placa"  placeholder="Ingrese placa" required ngModel/>
+        </div>
+      </div>
+      <div class="form-group row" *ngIf="isOn">
+        <div  class="col-sm-4" >
+          <label for="cilindraje">Cilindraje</label>
+        </div>
+        <div  class="col-sm-8">
+          <input type="text" class="form-control" name="cilindraje" placeholder="Ingrese cilindraje" required ngModel/>
+        </div>
       </div>
       <button type="submit" class="btn btn-primary" >Ingresar</button>
     </form>
   </div>
   <div  class="columnas col-md-7">
-    <h3>Vehiculos parqueados</h3>
+    <h3>Veh&iacute;culos parqueados</h3>
     <table class="table table-striped">
       <thead>
         <tr>
           <th scope="col">#</th>
           <th scope="col">Placa</th>
           <th scope="col">Tipo</th>
-          <th scope="col">Fecha Ingreso</th>
+          <th scope="col">Fecha ingreso</th>
           <th></th>
         </tr>
       </thead>
