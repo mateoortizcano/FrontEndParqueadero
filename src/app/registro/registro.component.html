@@ -1,0 +1,88 @@
+<!-- Modal -->
+
+<ng-template #contentFactura let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h5 class="modal-title" id="modalFacturaTitle">FACTURA</h5>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <b>Vehiculo: </b><p>{{factura.vehiculo.placa}}</p>
+        <b>Tipo Vehiculo: </b>
+        <p *ngIf = "factura.vehiculo.tipo === 1">Moto</p>
+        <p *ngIf = "factura.vehiculo.tipo === 2">Carro</p>
+        <b>Fecha ingreso: </b><p>{{factura.fechaIngreso | date:'dd/MM/yyyy, h:mm:ss a'}}</p>
+        <b>Fecha salida: </b><p>{{factura.fechaSalida | date:'dd/MM/yyyy, h:mm:ss a'}}</p>
+        <h4>Total a pagar: $ {{factura.precioTotalParqueo}}</h4>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-primary" (click)="c('Close click')" (click)="mostrarvehiculos()">Cerrar</button>
+      </div>
+</ng-template>
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title">INFORMACI&Oacute;N</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>{{info}}</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary" (click)="c('Close click')">Cerrar</button>
+    </div>
+  </ng-template>  
+  <hr>
+<!--Modal-->
+<div class="row">
+  <div  class="columnas col-md-3" >
+    <h3>Registro</h3>
+    <form #vehiculo = "ngForm" (ngSubmit) = "onClickSubmit(vehiculo.value)">
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" id="checkcarro" type="radio" name="tipo" value="2" (focus)="isOn=false" ngModel checked>
+        <label for="checkcarro" class="form-check-label">Carro</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" id="checkmoto" type="radio" name="tipo" value="1" (focus)="isOn=true" ngModel>
+        <label for="checkmoto" class="form-check-label" >Moto</label>
+      </div>
+      <div class="form-group">
+        <label for="placa">Placa</label>
+        <input type="text" class="form-control" name="placa"  placeholder="Ingrese placa" required="required" ngModel>
+      </div>
+      <div class="form-group" *ngIf="isOn">
+        <label for="cilindraje">Cilindraje</label>
+        <input type="text" class="form-control" name="cilindraje" placeholder="Ingrese cilindraje" ngModel>
+      </div>
+      <button type="submit" class="btn btn-primary" >Ingresar</button>
+    </form>
+  </div>
+  <div  class="columnas col-md-8">
+    <h3>Vehiculos parqueados</h3>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Placa</th>
+          <th scope="col">Tipo</th>
+          <th scope="col">Fecha Ingreso</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody *ngFor = "let registro of registro_parqueados">
+        <tr>
+          <th scope="row">{{registro.vehiculo.id}}</th>
+          <td>{{registro.vehiculo.placa}}</td>
+          <td *ngIf = "registro.vehiculo.tipo === 2">Carro</td>
+          <td *ngIf = "registro.vehiculo.tipo === 1">Moto</td>
+          <td>{{registro.fechaIngreso | date:'dd/MM/yyyy, h:mm:ss a'}}</td>
+          <td><button class="btn btn-primary" (click) = "registrarSalida(registro.vehiculo.placa)">Salida</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
